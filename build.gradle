@@ -1,0 +1,25 @@
+
+apply plugin: 'java'
+version = '1.0'
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'C:\\Tools\\Introscope\\Agent-8.2.4'
+    }
+}
+
+dependencies {
+    compile name:'Agent'
+    compile 'org.apache.commons:commons-jexl:2.1.1'
+    testCompile 'junit:junit:4.10'
+}
+
+
+
+
+
+
+
+
