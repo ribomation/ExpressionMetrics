@@ -1,5 +1,11 @@
 package com.ribomation.expressionmetrics;
 
+import com.ribomation.expressionmetrics.expression.ClassNameExpression;
+import com.ribomation.expressionmetrics.expression.JexlExpression;
+import com.ribomation.expressionmetrics.expression.MethodNameExpression;
+import com.ribomation.expressionmetrics.expression.PackageNameExpression;
+import com.ribomation.expressionmetrics.logger.NullLogger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,7 +28,7 @@ public class ExpressionRepository  {
     private Logger log = new NullLogger();
 
     public ExpressionRepository() {
-        expressions = new ConcurrentHashMap<>(128, 0.7F, 6 * Runtime.getRuntime().availableProcessors());
+        expressions = new ConcurrentHashMap<String, Expression>(128, 0.7F, 6 * Runtime.getRuntime().availableProcessors());
         add(new PackageNameExpression());
         add(new ClassNameExpression());
         add(new MethodNameExpression());
@@ -30,6 +36,10 @@ public class ExpressionRepository  {
 
     public ExpressionRepository(Logger log) {
         this();
+        this.log = log;
+    }
+
+    public void setLogger(Logger log) {
         this.log = log;
     }
 

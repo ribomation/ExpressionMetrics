@@ -1,5 +1,6 @@
-package com.ribomation.expressionmetrics;
+package com.ribomation.expressionmetrics.target;
 
+import com.ribomation.expressionmetrics.Target;
 import com.wily.introscope.agent.trace.InvocationData;
 
 /**

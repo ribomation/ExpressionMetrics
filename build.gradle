@@ -2,6 +2,17 @@
 apply plugin: 'java'
 version = '1.0'
 sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+description = """Introscope agent-plugin, that provides metric-name formatting and 
+metric-values based on reflective method-call expressions using JEXL."""
+
+project.ext {
+    packageName   = 'com.ribomation.expressionmetrics'
+    serviceName   = 'ExpressionMetrics'
+    formatterName = 'ExpressionNameFormatter'
+    tracerName    = 'ExpressionTracer'
+}
 
 repositories {
     mavenCentral()
@@ -16,9 +27,50 @@ dependencies {
     testCompile 'junit:junit:4.10'
 }
 
+jar {
+    dependsOn configurations.runtime
+    from {
+        configurations.runtime.grep{!it.name.contains('Agent')}.collect {it.isDirectory() ? it : zipTree(it)}
+    }
+    
+    manifest {
+        attributes('build-date': new Date().format('yyyy-MM-dd HH:mm'),
+                'build-tool': "Gradle version ${gradle.gradleVersion}",
 
+                'com-wily-Extension-Name': project.name,
+                'com-wily-Extension-Type': 'Introscope-Agent',
+                'com-wily-Extension-Version': project.version,
+                'com-wily-Extension-Plugins-List': 'Service,Formatter,Tracer',
+                
+                'com-wily-Extension-Plugin-Service-Name': project.serviceName,
+                'com-wily-Extension-Plugin-Service-Type': 'service',
+                'com-wily-Extension-Plugin-Service-Version': 1,
+                'com-wily-Extension-Plugin-Service-Entry-Point-Class': "${project.packageName}.${project.serviceName}",
+                
+                'com-wily-Extension-Plugin-Formatter-Name': project.formatterName,
+                'com-wily-Extension-Plugin-Formatter-Type': 'nameformatter',
+                'com-wily-Extension-Plugin-Formatter-Version': 1,
+                'com-wily-Extension-Plugin-Formatter-Entry-Point-Class': "${project.packageName}.${project.formatterName}",
+                
+                'com-wily-Extension-Plugin-Tracer-Name': project.tracerName,
+                'com-wily-Extension-Plugin-Tracer-Type': 'tracer',
+                'com-wily-Extension-Plugin-Tracer-Version': 1,
+                'com-wily-Extension-Plugin-Tracer-Entry-Point-Class': "${project.packageName}.${project.tracerName}",
 
+                'author-name': 'Jens Riboe',
+                'author-email': 'jens.riboe@ribomation.com',
+                'author-organization': 'Ribomation AB',
+                'author-url': 'http://blog.ribomation.com/'
+        )
+    }
+}
 
+task api(type: Javadoc) {
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.runtimeClasspath
+    options.tags << 'author'
+    options.tags << 'date'
+}
 
 
 

@@ -1,4 +1,6 @@
-package com.ribomation.expressionmetrics;
+package com.ribomation.expressionmetrics.logger;
+
+import com.ribomation.expressionmetrics.Logger;
 
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;

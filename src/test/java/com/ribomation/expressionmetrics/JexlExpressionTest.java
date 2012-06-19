@@ -1,5 +1,6 @@
 package com.ribomation.expressionmetrics;
 
+import com.ribomation.expressionmetrics.expression.JexlExpression;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

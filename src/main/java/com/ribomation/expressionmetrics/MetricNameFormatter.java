@@ -1,5 +1,8 @@
 package com.ribomation.expressionmetrics;
 
+import com.ribomation.expressionmetrics.expression.IdentityExpression;
+import com.ribomation.expressionmetrics.expression.JexlExpression;
+
 /**
  * Replaces '{key}' tokens in a string (metric name), with the value
  * of evaluated expressions.

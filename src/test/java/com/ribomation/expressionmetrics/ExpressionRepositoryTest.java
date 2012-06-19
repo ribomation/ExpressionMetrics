@@ -1,5 +1,6 @@
 package com.ribomation.expressionmetrics;
 
+import com.ribomation.expressionmetrics.logger.StdoutLogger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

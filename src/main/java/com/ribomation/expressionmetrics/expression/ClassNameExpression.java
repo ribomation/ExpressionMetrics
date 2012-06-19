@@ -1,4 +1,7 @@
-package com.ribomation.expressionmetrics;
+package com.ribomation.expressionmetrics.expression;
+
+import com.ribomation.expressionmetrics.Expression;
+import com.ribomation.expressionmetrics.Target;
 
 /**
  * DESCRIPTION

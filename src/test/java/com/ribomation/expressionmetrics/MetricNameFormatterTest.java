@@ -1,5 +1,6 @@
 package com.ribomation.expressionmetrics;
 
+import com.ribomation.expressionmetrics.logger.StdoutLogger;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,7 +76,6 @@ public class MetricNameFormatterTest {
         String metricName = "root|sub|metric";
         String result = formatter.format(metricName, target);
         assertThat(result, is(metricName));
-        System.out.printf("BUF: %s", buf);
     }
 
     @Test
